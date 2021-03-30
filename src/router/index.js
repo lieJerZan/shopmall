@@ -1,29 +1,58 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Router from 'vue-router'
+// import Home from '../components/home.vue'
+// import Sort from '../components/sort.vue'
+// import Shop from '../components/shop.vue'
+// import Profile from '../components/profile.vue'
+const Home = () => import('../views/home/home.vue')
+const Sort = () => import('../views/sort/sort.vue')
+const Shop = () => import('../views/shop/shop.vue')
+const Profile = () => import('../views/profile/profile.vue')
 
-Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+Vue.use(Router)
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+const router = new Router({
+  routes: [
+    {
+      path : '',
+      redirect : '/home'
+    },
+    {
+      path: '/home',
+      component: Home,
+      meta : {
+        title : '首页'
+      }
+    },
+    {
+      path: '/sort',
+      component: Sort,
+      meta : {
+        title : '分类'
+      }
+    },
+    {
+      path: '/shop',
+      component: Shop,
+      meta : {
+        title : '购物车'
+      }
+    },
+    {
+      path: '/profile',
+      component: Profile,
+      meta : {
+        title : '个人中心'
+      }
+    }
+  ],
+  mode : 'history'
 })
 
+router.beforeEach((to, from, next) => {
+  // to and from are both route objects. must call `next`.
+  document.title = to.matched[0].meta.title
+  next()
+})
 export default router
