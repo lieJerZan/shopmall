@@ -9,7 +9,7 @@
       :titles="titles"
       @tabclick="tabclick"
       :class="{ fixed: fixedtype, fixedcontrol : !fixedtype}"
-    ></tabcontrol>
+      ref="toptabcontrol"></tabcontrol>
     <!-- 实现返回顶部，需要获得scroll -->
     <bscroll
       class="content"
@@ -24,7 +24,7 @@
       <home-recommend-view :recommends="recommends"></home-recommend-view>
       <feature></feature>
       <!-- 商品上拉浏览 -->
-      <tabcontrol :titles="titles" @tabclick="tabclick"></tabcontrol>
+      <tabcontrol :titles="titles" @tabclick="tabclick" ref="tabcontrol"></tabcontrol>
       <goods-list :goods="showgoodstype"></goods-list>
     </bscroll>
     <back-top @click.native="topclick" v-show="status"></back-top>
@@ -108,6 +108,8 @@ export default {
           this.currentType = "sell";
           break;
       }
+      this.$refs.tabcontrol.currentflag = index;
+      this.$refs.toptabcontrol.currentflag = index;
     },
     // 网络请求方面的
 

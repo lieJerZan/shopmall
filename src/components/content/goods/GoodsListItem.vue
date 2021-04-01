@@ -28,9 +28,11 @@ export default {
       this.$bus.$emit('imgload')
     },
     clicklink(){
-      console.log(11);
+      // this.$router.push('/detail/' + this.item.iid)
+      this.$router.push({path: `/detail/${this.item.iid}`})
     }
   },
+  
 };
 </script>
 

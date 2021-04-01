@@ -8,7 +8,7 @@ const Home = () => import('../views/home/home.vue')
 const Sort = () => import('../views/sort/sort.vue')
 const Shop = () => import('../views/shop/shop.vue')
 const Profile = () => import('../views/profile/profile.vue')
-
+const Detail = () => import('../views/detail/detail.vue')
 
 Vue.use(Router)
 
@@ -45,6 +45,13 @@ const router = new Router({
       meta : {
         title : '个人中心'
       }
+    },
+    {
+      path: '/detail/:iid',
+      component: Detail,
+      meta : {
+        title : '商品详情'
+      },
     }
   ],
   mode : 'history'
@@ -53,6 +60,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // to and from are both route objects. must call `next`.
   document.title = to.matched[0].meta.title
+  // console.log(to);
   next()
 })
 export default router

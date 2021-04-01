@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <keep-alive>
+    <!-- 缓存中，除了detail会重新加载，其他的不会 -->
+    <keep-alive exclude="Detail">
       <router-view />
     </keep-alive>
     <main-tabbar></main-tabbar>
@@ -11,8 +12,6 @@ import MainTabbar from "./components/content/MainTabbar";
 export default {
   name: "App",
   components: {
-    // TabBar,
-    // TabbarItem
     MainTabbar,
   },
 };
